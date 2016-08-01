@@ -2,6 +2,7 @@
  * 
  */
 
+package com.trendrr.beanstalk.example;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,7 +45,7 @@ public class Example {
 	 * @throws BeanstalkException 
 	 */
 	public static void clientExample() throws BeanstalkException {
-		BeanstalkClient client = new BeanstalkClient("localhost", 8010, "example");
+		BeanstalkClient client = new BeanstalkClient("localhost", 11300, "example");
 		log.info("Putting a job");
 		client.put(1l, 0, 5000, "this is some data".getBytes());
 		BeanstalkJob job = client.reserve(60);
@@ -55,7 +56,7 @@ public class Example {
 	
 	
 	public static void pooledExample()  throws BeanstalkException {
-		BeanstalkPool pool = new BeanstalkPool("localhost", 8010, 
+		BeanstalkPool pool = new BeanstalkPool("localhost", 11300, 
 				30, //poolsize 
 			"example" //tube to use
 		);
