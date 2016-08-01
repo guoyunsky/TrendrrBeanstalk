@@ -413,10 +413,10 @@ public class BeanstalkClient {
 	 * @param job The job to bury. This job must previously have been reserved.
 	 * @param priority The new priority to assign to the job.
 	 */
-	public void bury(BeanstalkJob job, int priority) throws BeanstalkException {
+	public void bury(Long jobId, int priority) throws BeanstalkException {
 		try {
 			this.init();
-			String command = "bury " + job.getId() + " " + priority + "\r\n";
+			String command = "bury " + jobId + " " + priority + "\r\n";
 
 			log.debug(this);
 			log.debug(command);
@@ -436,6 +436,17 @@ public class BeanstalkClient {
 		} catch (Exception x) {
 			throw new BeanstalkException(x);
 		}
+	}
+	
+	/**
+	 * Buries a job ("buried" state means the job will not be touched by the server again until "kicked").
+	 * @throws BeanstalkException If an unexpected response is received from the server, or other unexpected
+	 * 	 problem occurs.
+	 * @param job The job to bury. This job must previously have been reserved.
+	 * @param priority The new priority to assign to the job.
+	 */
+	public void bury(BeanstalkJob job, int priority) throws BeanstalkException {
+	        this.bury(job.getId(), priority);
 	}
 }
 
