@@ -97,7 +97,9 @@ public class BeanstalkClient {
 			}
 		} catch (BeanstalkException x) {
 			throw x;
-		} 
+		} catch (Exception x) {
+			throw new BeanstalkException(x);
+		}
 	}
 	
 	public void useTube(String tube) throws BeanstalkException{
